@@ -1,0 +1,71 @@
+<html>
+<head>
+    <link type="text/css" href="style.css">
+</head>
+<body>
+  <div class="header">
+      <label for="handInput">Main: </label><input type="text" id="handInput" onkeyup="parseHand(this.value)"/>
+      <label for="tileSize">Taille des tuiles: </label><input type="number" id="tileSize" value="100" onchange="parseHand(this.value)"/><br/>
+      xxxm = Man, xxxp = Pin, xxxs = Sou, T = Ton, N = Nan, S = Shaa, P = Pei, B = Haku, V = Hatsu, R = Chun<br/>
+      (Exemple: 123m456p789sTNSPP)
+  </div>
+  <hr/>
+  <div id="content">
+  </div>
+  <footer>
+      Auteur: <a href="">Kwoinwoin</a>
+      images: <a href="https://github.com/arsdragonfly/riichi-mahjong-tiles">arsdragonfly</a> & <a href="https://github.com/FluffyStuff/riichi-mahjong-tiles">FluffyStuff</a>
+      | Licence : <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+  </footer>
+
+<script type="application/javascript">
+  const regex = /^(?:(\d+)m)?(?:(\d+)p)?(?:(\d+)s)?(T{0,4})(N{0,4})(S{0,4})(P{0,4})(B{0,4})(V{0,4})(R{0,4})$/;
+  const map = {
+    T: "Ton",
+    N: "Nan",
+    S: "Shaa",
+    P: "Pei",
+    B: "Haku",
+    V: "Hatsu",
+    R: "Chun",
+    m: "Man",
+    p: "Pin",
+    s: "Sou"
+  }
+  function parseHand(value) {
+    const contentElement = document.getElementById("content");
+    contentElement.textContent = "";
+    const hand = value.trim();
+    const match = hand.match(regex);
+    if (match) {
+      const man = match[1];
+      const pin = match[2];
+      const sou = match[3];
+      const ton = match[4];
+      const nan = match[5];
+      const shaa = match[6];
+      const pei = match[7];
+      const haku = match[8];
+      const hatsu = match[9];
+      const chun = match[10];
+      const handElem = document.createElement("div");
+      man?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("m", num)));
+      pin?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("p", num)));
+      sou?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("s", num)));
+      (ton + nan + shaa + pei + haku + hatsu + chun).split("").forEach((type) => handElem.appendChild(getImg(type)));
+      contentElement.appendChild(handElem);
+    } else {
+      contentElement.textContent = "Main Invalide";
+    }
+  }
+
+  function getImg(type, num = "") {
+    const height = document.getElementById("tileSize").value;
+    const tileElement = document.createElement("img");
+    tileElement.src = "./tiles/ComposedRegular/" + map[type] + num + ".png";
+    tileElement.setAttribute("height", height);
+    return tileElement;
+  }
+</script>
+</body>
+</html>
