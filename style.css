@@ -1,3 +1,10 @@
-.header {
-    margin: auto;
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer > div {
+    padding: 10px;
 }
