@@ -21,6 +21,7 @@
       </div>
   </footer>
 
+<script type="application/javascript" src="./vendor/html2canvas.min.js"></script>
 <script type="application/javascript">
   const regex = /^(?:(\d+)m)?(?:(\d+)p)?(?:(\d+)s)?(T{0,4})(N{0,4})(S{0,4})(P{0,4})(B{0,4})(V{0,4})(R{0,4})$/;
   const map = {
@@ -51,13 +52,20 @@
       const haku = match[8];
       const hatsu = match[9];
       const chun = match[10];
+      const handWrapperElem = document.createElement("div");
+      handWrapperElem.setAttribute("id", "handWrapper");
       const handElem = document.createElement("div");
       handElem.setAttribute("id", "hand");
       man?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("m", num)));
       pin?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("p", num)));
       sou?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("s", num)));
       (ton + nan + shaa + pei + haku + hatsu + chun).split("").forEach((type) => handElem.appendChild(getImg(type)));
-      contentElement.appendChild(handElem);
+      const dlButton = document.createElement("button");
+      dlButton.textContent = "(Téléchargement Bientôt Disponible)";
+      dlButton.onclick = printToFile;
+      handWrapperElem.appendChild(handElem);
+      handWrapperElem.appendChild(dlButton);
+      contentElement.appendChild(handWrapperElem);
     } else {
       contentElement.textContent = "Main Invalide";
     }
@@ -67,8 +75,27 @@
     const height = document.getElementById("tileSize").value;
     const tileElement = document.createElement("img");
     tileElement.src = "./tiles/ComposedRegular/" + map[type] + num + ".png";
+    tileElement.setAttribute("crossorigin", "anonymous");
     tileElement.setAttribute("height", height);
     return tileElement;
+  }
+
+  function downloadURI(uri, name) {
+    const link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function printToFile() {
+    const handElem = document.getElementById("hand").firstChild;
+    html2canvas(handElem, { allowTaint: true, useCORS: true }).then(canvas => {
+        const myImage = canvas.toDataURL("image/png");
+        downloadURI("data:" + myImage, "riichiHandGenerator.png");
+      }
+    );
   }
 </script>
 </body>

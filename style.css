@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-#hand {
+#handWrapper {
     background-color: rgba(0,0,100,0.1);
     width: 100%;
     padding: 10px;
@@ -15,6 +15,6 @@ footer {
     left: 0;
 }
 
-footer, header {
+footer > div, header, #hand {
     padding: 10px;
 }
