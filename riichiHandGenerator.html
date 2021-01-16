@@ -3,12 +3,12 @@
     <link type="text/css" href="style.css" rel="stylesheet">
 </head>
 <body>
-  <div class="header">
-      <label for="handInput">Main: </label><input type="text" id="handInput" onkeyup="parseHand(this.value)"/>
-      <label for="tileSize">Taille des tuiles: </label><input type="number" id="tileSize" value="100" onchange="parseHand(this.value)"/><br/>
+  <header>
+      <label for="handInput">Main: </label><input type="text" id="handInput" onkeyup="parseHand()"/>
+      <label for="tileSize">Taille des tuiles: </label><input type="number" id="tileSize" value="100" onchange="parseHand()"/><br/>
       xxxm = Man, xxxp = Pin, xxxs = Sou, T = Ton, N = Nan, S = Shaa, P = Pei, B = Haku, V = Hatsu, R = Chun<br/>
       (Exemple: 123m456p789sTNSPP)
-  </div>
+  </header>
   <hr/>
   <div id="content">
   </div>
@@ -35,10 +35,10 @@
     p: "Pin",
     s: "Sou"
   }
-  function parseHand(value) {
+  function parseHand() {
     const contentElement = document.getElementById("content");
     contentElement.textContent = "";
-    const hand = value.trim();
+    const hand = document.getElementById("handInput").value.trim();
     const match = hand.match(regex);
     if (match) {
       const man = match[1];
@@ -52,6 +52,7 @@
       const hatsu = match[9];
       const chun = match[10];
       const handElem = document.createElement("div");
+      handElem.setAttribute("id", "hand");
       man?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("m", num)));
       pin?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("p", num)));
       sou?.split("").sort((a, b) => a-b).forEach(num => handElem.appendChild(getImg("s", num)));

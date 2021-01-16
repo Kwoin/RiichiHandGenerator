@@ -1,3 +1,13 @@
+body {
+    margin: 0;
+}
+
+#hand {
+    background-color: rgba(0,0,100,0.1);
+    width: 100%;
+    padding: 10px;
+}
+
 footer {
     width: 100%;
     position: fixed;
@@ -5,6 +15,6 @@ footer {
     left: 0;
 }
 
-footer > div {
+footer, header {
     padding: 10px;
 }
