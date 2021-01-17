@@ -2,6 +2,10 @@ body {
     margin: 0;
 }
 
+#handInput {
+    width: 500px;
+}
+
 #handWrapper {
     background-color: rgba(0,0,100,0.1);
     width: 100%;

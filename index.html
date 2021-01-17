@@ -9,8 +9,8 @@
       xxxm = Man, xxxp = Pin, xxxs = Sou, T = Ton, N = Nan, S = Shaa, P = Pei, B = Haku, V = Hatsu, R = Chun<br/>
       Vous pouvez séparer les groupes avec un espace.<br/>
       Vous pouvez inclinez une tuile dans une groupe en ajoutant (x) où x est la position de la tuile inclinée.<br/>
-      Vous pouvez ajouter (0) après un groupe de 4 pour indiquer un Kan caché.
-      (Exemple: 123m456p789sTNSP P)
+      Vous pouvez ajouter (0) après un groupe de 4 pour indiquer un Kan caché.<br/>
+      Exemple: 123m456p789sT PPPP(1)
   </header>
   <hr/>
   <div id="content">
@@ -35,7 +35,7 @@
     const handValue = document.getElementById("handInput").value.trim();
     const groups = parse(handValue);
     const dlButton = document.createElement("button");
-    dlButton.textContent = "(Téléchargement Bientôt Disponible)";
+    dlButton.textContent = "Télécharger";
     dlButton.onclick = printToFile;
     const handWrapperElem = document.createElement("div");
     handWrapperElem.setAttribute("id", "handWrapper");
@@ -62,7 +62,7 @@
   }
 
   function printToFile() {
-    const handElem = document.getElementById("hand").firstChild;
+    const handElem = document.getElementById("hand");
     html2canvas(handElem, { allowTaint: true, useCORS: true }).then(canvas => {
         const myImage = canvas.toDataURL("image/png");
         downloadURI("data:" + myImage, "riichiHandGenerator.png");
