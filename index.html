@@ -29,8 +29,10 @@
 <script type="application/javascript" src="./vendor/html2canvas.min.js"></script>
 <script type="application/javascript">
   let hands = [];
+  let tileSize = 75;
 
   function parseHand() {
+    tileSize = document.getElementById("tileSize").value;
     const contentElement = document.getElementById("content");
     contentElement.textContent = "";
     const handValue = document.getElementById("handInput").value.trim();

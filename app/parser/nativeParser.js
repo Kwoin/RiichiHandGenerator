@@ -88,9 +88,8 @@ function parseGroupWithRegex(value, regex, type) {
 }
 
 function getImg(type, num = "") {
-  const height = document.getElementById("tileSize")?.value || tileSize || 75;
   const tileElement = document.createElement("img");
   tileElement.src = tilesPath + map[type] + num + ".png";
-  tileElement.setAttribute("height", height);
+  tileElement.setAttribute("height", tileSize);
   return tileElement;
 }
