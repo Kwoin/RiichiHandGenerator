@@ -24,14 +24,14 @@ const map = {
   [types.SOU]: "Sou"
 }
 
-const regex = /^(?:(\d+)m)?(?:(\d+)p)?(?:(\d+)s)?(T{0,4})(N{0,4})(S{0,4})(P{0,4})(B{0,4})(V{0,4})(R{0,4})$/;
-
 const regexMan = /(\d+)m/;
 const regexPin = /(\d+)p/;
 const regexSou = /(\d+)s/;
 const regexHonors = /([TNSPBVR]+)/;
 const regexSeparator = /\s+/;
 const regexInclinaison = /\((\d\))$/;
+const regexHiddenKan = /\(h\)$/;
+const tilesPath = "./vendor/tiles/ComposedRegular/";
 
 function parse(value) {
   const groups = value.split(regexSeparator)
@@ -65,6 +65,9 @@ function parseGroup(value) {
         res[index] = kanWrapper;
         res.splice(index + 1, 1);
       }
+    } else {
+      res[0].src = tilesPath + "Back.png";
+      res[3].src = tilesPath + "Back.png";
     }
   }
   console.log("res", res);
@@ -89,7 +92,7 @@ function parseGroupWithRegex(value, regex, type) {
 function getImg(type, num = "") {
   const height = document.getElementById("tileSize").value;
   const tileElement = document.createElement("img");
-  tileElement.src = "./vendor/tiles/ComposedRegular/" + map[type] + num + ".png";
+  tileElement.src = tilesPath + map[type] + num + ".png";
   tileElement.setAttribute("height", height);
   return tileElement;
 }

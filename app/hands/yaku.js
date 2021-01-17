@@ -60,7 +60,7 @@ hands = { ...hands,
   },
   sanshokuDoujun: {
     title: "YAKU - 1 Han (+1 si main cachée) - Sanshoku Doujun",
-    description: "Trois séquences identiques dans les 3 familles",
+    description: "3 séquences identiques dans les 3 familles",
     hand: "456m45699p456sSSS"
   },
   ittsu: {
@@ -81,7 +81,17 @@ hands = { ...hands,
   sanankou: {
     title: "YAKU - 2 Han - Sanankou",
     description: "Main composée de 3 triplets cachés",
-    hand: "222444pNNNVV 999s"
+    hand: "222444pNNNVV 999s(3)"
+  },
+  sanshokuDoukou: {
+    title: "YAKU - 2 Han - Sanshoku Doukou",
+    description: "3 triplets identiques dans les 3 familles",
+    hand: "444m444789p444sRR"
+  },
+  sankatsu: {
+    title: "YAKU - 2 Han - Sankatsu",
+    description: "Main composée de 3 Kan",
+    hand: "234pNN 1111m(0) PPPP(0) VVVV(2)"
   }
 
 
