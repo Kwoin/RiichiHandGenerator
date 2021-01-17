@@ -1,0 +1,53 @@
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Trykker&display=swap" rel="stylesheet">
+    <link type="text/css" href="style.css" rel="stylesheet">
+</head>
+<body>
+<div id="show">
+  <h1 id="titre"></h1>
+  <h3 id="closed"></h3>
+  <div id="description"></div>
+  <div id="hand"></div>
+</div>
+<script type="application/javascript" src="./app/parser/nativeParser.js"></script>
+<script type="application/javascript">
+  let hands = [];
+  let tileSize;
+</script>
+<script type="application/javascript" src="./app/hands/yaku.js"></script>
+<script type="application/javascript">
+  (function() {
+
+    const query = window.location.search;
+    const params = new URLSearchParams(query);
+    tileSize = params.get("tileSize") || 75;
+    const handKey = params.get("hand");
+    const hand = hands[handKey];
+    if (hand) {
+      document.getElementById("titre").textContent = hand.title;
+      document.getElementById("closed").textContent = hand.closed ? "Main cachée uniquement" : "Main cachée ou ouverte"
+      document.getElementById("description").textContent = hand.description;
+      if (hand.hand) {
+        const contentElement = document.getElementById("hand");
+        contentElement.textContent = "";
+        const groups = parse(hand.hand);
+        const handWrapperElem = document.createElement("div");
+        const handElem = document.createElement("div");
+        handElem.setAttribute("id", "hand");
+        handWrapperElem.appendChild(handElem);
+        groups.forEach(group => {
+          groupElem = document.createElement("div");
+          groupElem.classList = "group";
+          group.forEach(tile => groupElem.appendChild(tile));
+          handElem.appendChild(groupElem);
+        })
+        contentElement.appendChild(handWrapperElem);
+      }
+    }
+  })();
+
+</script>
+</body>
+</html>

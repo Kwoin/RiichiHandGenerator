@@ -70,14 +70,12 @@ function parseGroup(value) {
       res[3].src = tilesPath + "Back.png";
     }
   }
-  console.log("res", res);
   return res;
 }
 
 function parseGroupWithRegex(value, regex, type) {
   const res = [];
   const match = value.match(regex);
-  console.log("match", match);
   if (match) {
     const chars = match[1].split("")
     if (type) {
@@ -90,7 +88,7 @@ function parseGroupWithRegex(value, regex, type) {
 }
 
 function getImg(type, num = "") {
-  const height = document.getElementById("tileSize").value;
+  const height = document.getElementById("tileSize")?.value || tileSize || 75;
   const tileElement = document.createElement("img");
   tileElement.src = tilesPath + map[type] + num + ".png";
   tileElement.setAttribute("height", height);
