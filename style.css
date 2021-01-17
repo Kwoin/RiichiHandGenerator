@@ -18,3 +18,8 @@ footer {
 footer > div, header, #hand {
     padding: 10px;
 }
+
+.group {
+    display: inline-block;
+    margin-right: 30px;
+}
