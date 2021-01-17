@@ -10,7 +10,8 @@
       Vous pouvez séparer les groupes avec un espace.<br/>
       Vous pouvez inclinez une tuile dans une groupe en ajoutant (x) où x est la position de la tuile inclinée.<br/>
       Vous pouvez ajouter (0) après un groupe de 4 pour indiquer un Kan caché.<br/>
-      Exemple: 123m456p789sT PPPP(1)
+      Exemple: 123m456p789sT PPPP(1)<br/>
+      <label for="sampleSelect">Yaku: </label><select id="sampleSelect" onchange="selectExample()"></select>
   </header>
   <hr/>
   <div id="content">
@@ -69,7 +70,34 @@
       }
     );
   }
+
+  function selectExample() {
+    const value = document.getElementById("sampleSelect").value;
+    const handInputElem = document.getElementById("handInput");
+    handInputElem.setAttribute("value", value);
+    parseHand();
+  }
+
 </script>
 <script type="application/javascript" src="./app/hands/yaku.js"></script>
+<script type="application/javascript">
+  (function() {
+    const selectElem = document.getElementById("sampleSelect");
+    const blankOptionElem = document.createElement("option");
+    blankOptionElem.setAttribute("value", "");
+    blankOptionElem.textContent = "";
+    selectElem.appendChild(blankOptionElem);
+    const options = Object.values(hands)
+     .filter(value => value.hand);
+    console.log(options);
+    options.forEach(option => {
+      const display = option.title.split(" - ").pop();
+      const optionElem = document.createElement("option");
+      optionElem.setAttribute("value", option.hand);
+      optionElem.textContent = display;
+      selectElem.appendChild(optionElem);
+    });
+  })();
+</script>
 </body>
 </html>

@@ -92,7 +92,106 @@ hands = { ...hands,
     title: "YAKU - 2 Han - Sankatsu",
     description: "Main composée de 3 Kan",
     hand: "234pNN 1111m(0) PPPP(0) VVVV(2)"
+  },
+  chiitoitsu: {
+    title: "YAKU - 2 Han - Chiitoitsu",
+    description: "Main composée de 7 paires",
+    hand: "1177p55m44sNNSSRR"
+  },
+  honroutou: {
+    title: "YAKU - 2 Han - Honroutou",
+    description: "Main composée uniquement avec des terminales et des honneurs",
+    hand: "111999m999sNNPPP"
+  },
+  shousangen: {
+    title: "YAKU - 2 Han - Shousangen",
+    description: "Main composée des deux triplets de dragon et d'une paire de dragon",
+    hand: "678m234sBBBRRRVV"
+  },
+  honitsu: {
+    title: "YAKU - 2 Han (+1 si main cachée) - Honitsu",
+    description: "Main composée de tuile d'une seule famille et d'honneurs",
+    hand: "123666789pNNPPP"
+  },
+  junchan: {
+    title: "YAKU - 2 Han (+1 si main cachée) - Junchan taiyao",
+    description: "Tous les groupes formant la main contiennent au moins une terminale",
+    hand: "11999m789p123789s"
+  },
+  ryanpeikou: {
+    title: "YAKU - 3 Han - Ryanpeikou",
+    closed: true,
+    description: "Main composée de deux Iipeikou",
+    hand: "11999m789p123789s"
+  },
+  chinitsu: {
+    title: "YAKU - 5 Han (+1 si main cachée) - Chinitsu",
+    closed: true,
+    description: "Main composée uniquement de tuile d'une seule famille",
+    hand: "12333455667999p"
+  },
+  kokushi: {
+    title: "YAKUMAN - Kokushi musou",
+    closed: true,
+    description: "Un exemplaire de chaque terminale + 1 terminale ou honneur",
+    hand: "19m19p19sTNSPBVRR"
+  },
+  suuankou: {
+    title: "YAKUMAN - Suuankou",
+    closed: true,
+    description: "4 triplets cachés",
+    hand: "222888m444pNNNRR"
+  },
+  daisangen: {
+    title: "YAKUMAN - Daisangen",
+    description: "3 triplets de dragon",
+    hand: "234m22sBBBVVVRRR"
+  },
+  shoosuushii: {
+    title: "YAKUMAN - Shousuushii",
+    description: "3 triplets de vent et une paire de vent",
+    hand: "888mTTTNNNSSSPP"
+  },
+  daisuushii: {
+    title: "YAKUMAN - Daisuushii",
+    description: "4 triplets de vent",
+    hand: "11sTTTNNNSSSPPP"
+  },
+  tsuuiisou: {
+    title: "YAKUMAN - Tsuuiisou",
+    description: "Tous les groupes de la main sont composés uniquement d'honneur",
+    hand: "TTTNNNSSBBBVVV"
+  },
+  chinroutou: {
+    title: "YAKUMAN - Chinroutou",
+    description: "Tous les groupes de la main sont composés uniquement de terminale",
+    hand: "111999m11199p111s"
+  },
+  ryuuiisou: {
+    title: "YAKUMAN - Ryuuiisou",
+    description: "Tous les groupes de la main sont composés des tuiles 2-3-4-6-8 Sou et/ou dragon vert",
+    hand: "22334466688sVVV"
+  },
+  chuurenPoutou: {
+    title: "YAKUMAN - Chuuren poutou",
+    description: "1112345678999 dans une même famille + 1 tuile dans cette famille",
+    hand: "11123456789999p"
+  },
+  suukantsu: {
+    title: "YAKUMAN - Suukantsu",
+    description: "4 Kan",
+    hand: "2222m(0) 6666p(2) 4444s(3) RRRR(0) PP"
+  },
+  tenhou: {
+    title: "YAKUMAN - Tenhou",
+    description: "Est possède une main gagnante au tirage",
+  },
+  chiihou: {
+    title: "YAKUMAN - Chiihou",
+    description: "Un joueur obtient une main gagnante sur sa première pioche",
+  },
+  nagashi: {
+    title: "YAKU - 5 Han - Nagashi mangan",
+    description: "La défausse se compose uniquement de terminale ou d'honneur. Aucune tuile défaussée n'a été appelée.",
   }
-
-
 };

@@ -2,6 +2,12 @@ body {
     margin: 0;
 }
 
+#content {
+    height: Calc(100vh - 215px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 #handInput {
     width: 500px;
 }
