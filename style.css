@@ -23,3 +23,12 @@ footer > div, header, #hand {
     display: inline-block;
     margin-right: 30px;
 }
+
+.tilted {
+    transform: rotate(90deg) translateX(-100%);
+    transform-origin: bottom left;
+}
+
+.kan-tilt {
+    display: inline-block;
+}

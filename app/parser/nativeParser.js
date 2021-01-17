@@ -31,11 +31,11 @@ const regexPin = /(\d+)p/;
 const regexSou = /(\d+)s/;
 const regexHonors = /([TNSPBVR]+)/;
 const regexSeparator = /\s+/;
+const regexInclinaison = /\((\d\))$/;
 
 function parse(value) {
   const groups = value.split(regexSeparator)
       .map(parseGroup);
-
   return groups;
 }
 
@@ -45,6 +45,28 @@ function parseGroup(value) {
   res.push(...parseGroupWithRegex(value, regexPin, types.PIN));
   res.push(...parseGroupWithRegex(value, regexSou, types.SOU));
   res.push(...parseGroupWithRegex(value, regexHonors));
+  const inclinaisonMatch = value.match(regexInclinaison);
+  if (inclinaisonMatch) {
+    const index = parseInt(inclinaisonMatch[1]) - 1;
+    const img = res[index];
+    if (img) {
+      img.setAttribute("width", img.getAttribute("height"));
+      img.removeAttribute("height");
+      img.src = img.src.substring(0, img.src.length - 4) + "-e.png";
+      if (res.length === 4) {
+        const imgNext = res[index + 1];
+        imgNext.setAttribute("width", imgNext.getAttribute("height"));
+        imgNext.removeAttribute("height");
+        imgNext.src = imgNext.src.substring(0, imgNext.src.length - 4) + "-e.png";
+        const kanWrapper = document.createElement("div");
+        kanWrapper.classList = "kan-tilt";
+        kanWrapper.style.width = imgNext.getAttribute("width");
+        kanWrapper.append(img, imgNext);
+        res[index] = kanWrapper;
+        res.splice(index + 1, 1);
+      }
+    }
+  }
   console.log("res", res);
   return res;
 }

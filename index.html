@@ -7,7 +7,7 @@
       <label for="handInput">Main: </label><input type="text" id="handInput" onkeyup="parseHand()"/>
       <label for="tileSize">Taille des tuiles: </label><input type="number" id="tileSize" value="75" onchange="parseHand()"/><br/>
       xxxm = Man, xxxp = Pin, xxxs = Sou, T = Ton, N = Nan, S = Shaa, P = Pei, B = Haku, V = Hatsu, R = Chun<br/>
-      Vous pouvez séparer les groupes avec un espace<br/>
+      Vous pouvez séparer les groupes avec un espace | Vous pouvez inclinez une tuile dans une groupe en ajoutant (x) où x est la position de la tuile inclinée<br/>
       (Exemple: 123m456p789sTNSP P)
   </header>
   <hr/>
@@ -25,7 +25,7 @@
 <script type="application/javascript" src="./app/parser/nativeParser.js"></script>
 <script type="application/javascript" src="./vendor/html2canvas.min.js"></script>
 <script type="application/javascript">
-
+  let hands = [];
 
   function parseHand() {
     const contentElement = document.getElementById("content");
@@ -68,5 +68,6 @@
     );
   }
 </script>
+<script type="application/javascript" src="./app/hands/yaku.js"></script>
 </body>
 </html>
