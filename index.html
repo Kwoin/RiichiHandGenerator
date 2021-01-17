@@ -74,7 +74,7 @@
   function selectExample() {
     const value = document.getElementById("sampleSelect").value;
     const handInputElem = document.getElementById("handInput");
-    handInputElem.setAttribute("value", value);
+    handInputElem.value = value;
     parseHand();
   }
 
