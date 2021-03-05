@@ -44,7 +44,7 @@ footer > div, header, #hand {
 }
 
 #show {
-    font-family: 'Trykker', serif;
+    font-family: 'Roboto', serif;
 }
 
 #show #hand {
@@ -55,7 +55,7 @@ footer > div, header, #hand {
 
 #titre {
     margin: 0;
-    color: darkblue;
+    color: #DDD;
     font-size: 1.20em;
     display: inline-block;
 }
@@ -66,6 +66,10 @@ footer > div, header, #hand {
     font-size: 0.75em;
     color: #AAAAAA;
     display: inline-block;
+}
+
+#description {
+    color: #DDD;
 }
 
 

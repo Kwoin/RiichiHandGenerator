@@ -87,9 +87,9 @@ function parseGroupWithRegex(value, regex, type) {
   return res;
 }
 
-function getImg(type, num = "") {
+function getImg(type, num) {
   const tileElement = document.createElement("img");
-  tileElement.src = tilesPath + map[type] + num + ".png";
+  tileElement.src = tilesPath + map[type] + (num || "") + ".png";
   tileElement.setAttribute("height", tileSize);
   return tileElement;
 }
