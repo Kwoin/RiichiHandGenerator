@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Tuile } from "@kwoin/riichi-utils";
 
 @Component({
-  selector: 'bmj-tile-row',
+  selector: 'bmj-tile-group',
   templateUrl: './tile-group.component.html',
   styleUrls: ['./tile-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TileGroupComponent implements OnInit {
 

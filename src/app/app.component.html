@@ -1,3 +1,10 @@
 <form [formGroup]="riichiForm">
-  <input formControlName="hand" />
+  <div class="head">
+    <label for="hand">Main</label><input id="hand" formControlName="hand" />
+  </div>
 </form>
+<div class="content">
+  <div class="groups">
+    <bmj-tile-group @droppingGroup *ngFor="let group of groups" [tileColumns]="group"></bmj-tile-group>
+  </div>
+</div>

@@ -6,6 +6,13 @@
   position: absolute;
 }
 
+.tile-image {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .left {
   transform: rotate(90deg) translate(-133%, 0%);
   transform-origin: bottom left;

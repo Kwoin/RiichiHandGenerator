@@ -3,8 +3,10 @@
     <img src="assets/tiles/blank.svg" *ngIf="blank" class="tile"/>
     <img src="assets/tiles/back.svg" *ngIf="back" class="tile"/>
     <ng-container *ngIf="tileName">
-      <img src="assets/tiles/Front.svg" class="tile" [width]="width" [height]="height"/>
-      <img [src]="'assets/tiles/' + tileName" class="tile" [width]="width" [height]="height"/>
+      <img src="assets/tiles/Front.png" class="tile" [width]="width" [height]="height"/>
+      <div class="tile-image" [style.width]="width + 'px'" [style.height]="height + 'px'">
+        <img [src]="'assets/tiles/' + tileName" [width]="width * 0.75" [height]="height * 0.75"/>
+      </div>
     </ng-container>
   </div>
 </div>

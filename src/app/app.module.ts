@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { TileComponent } from './tile/tile.component';
 import { TileColumnComponent } from './tile-column/tile-column.component';
 import { TileGroupComponent } from './tile-group/tile-group.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { TileGroupComponent } from './tile-group/tile-group.component';
     TileGroupComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
