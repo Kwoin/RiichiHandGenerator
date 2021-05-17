@@ -1,0 +1,17 @@
+.tile-container {
+  position: relative;
+}
+
+.tile {
+  position: absolute;
+}
+
+.left {
+  transform: rotate(90deg) translate(-133%, 0%);
+  transform-origin: bottom left;
+}
+
+.right {
+  transform: rotate(-90deg) translate(133%, 25%);
+  transform-origin: bottom right;
+}

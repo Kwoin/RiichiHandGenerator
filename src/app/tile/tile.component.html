@@ -1,1 +1,12 @@
-<p>tile works!</p>
+<div [style.width]="(tiltLeft || tiltRight ? height : width) + 'px'" [style.height]="(tiltLeft || tiltRight ? width : height) + 'px'">
+  <div class="tile-container" [style.width]="width + 'px'" [style.height]="height + 'px'" [class.left]="tiltLeft" [class.right]="tiltRight">
+    <img src="assets/tiles/blank.svg" *ngIf="blank" class="tile"/>
+    <img src="assets/tiles/back.svg" *ngIf="back" class="tile"/>
+    <ng-container *ngIf="tileName">
+      <img src="assets/tiles/Front.svg" class="tile" [width]="width" [height]="height"/>
+      <img [src]="'assets/tiles/' + tileName" class="tile" [width]="width" [height]="height"/>
+    </ng-container>
+  </div>
+</div>
+
+
