@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { kwoinParser, MainBrute, Parser, ParserError, Tuile } from "riichi-utils";
+import { kwoinParser, MainBrute, Parser, Tuile } from "riichi-utils";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,9 @@ export class AppComponent implements OnInit {
     return index.toString();
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ export class AppComponent implements OnInit {
     )
     this.riichiForm.valueChanges.subscribe(value => {
       try {
-        const mainBrute = this.parser(value.hand)[0];
+        const mainBrute = this.parser(value.hand?.trim())[0];
         this.groups = this.mainBruteToGroups(mainBrute);
         console.log("groups", this.groups);
       } catch (e) {
@@ -46,6 +49,11 @@ export class AppComponent implements OnInit {
         console.error(this.errorMessage);
       }
     })
+    this.route.queryParams.subscribe(queryParams => {
+      const hand = queryParams.hand;
+      if (!hand) return;
+      this.riichiForm.get("hand")?.setValue(hand);
+    })
   }
 
   mainBruteToGroups(mainBrute: MainBrute): Tuile[][][] {
@@ -53,32 +61,27 @@ export class AppComponent implements OnInit {
     if (!mainBrute) return res;
     const groupeTuileCachees = this.tuilesToGroupe(mainBrute.tuilesCachees);
     const kansCaches = mainBrute.kansCaches.map(groupe => this.tuilesToGroupe(groupe));
-    const groupesOuvert = mainBrute.groupesOuverts.map(groupe => this.tuilesOuvertesToGroupe(groupe));
+    const groupesOuvert = mainBrute.groupesOuverts.map(groupe => this.tuilesToGroupe(groupe));
     res.push(groupeTuileCachees, ...kansCaches, ...groupesOuvert);
     return res;
   }
 
   tuilesToGroupe(tuiles: Tuile[]): Tuile[][] {
     if (!tuiles) return [];
-    return tuiles.map(tuile => [tuile]);
-  }
-
-  tuilesOuvertesToGroupe(tuiles: Tuile[]): Tuile[][] {
-    if (!tuiles) return [];
     const res = [];
     const tuilesCopy = tuiles.slice();
     let tuile;
     let tuileColumn;
-    while (tuile = tuilesCopy.pop()) {
-      tuileColumn = [tuile];
-      res.unshift(tuileColumn);
-      if (tuile.stacked) {
-        const subTile = tuilesCopy.pop();
-         console.log("subTile", subTile);
+    while (tuile = tuilesCopy.shift()) {
+      if (tuile.stacked && tuileColumn) {
+        const subTile = tuileColumn[0];
         if (!subTile) continue;
         tuile.tilted = subTile.tilted;
         tuile.tiltRotation = subTile.tiltRotation;
-        tuileColumn.unshift(subTile);
+        tuileColumn.unshift(tuile);
+      } else {
+        tuileColumn = [tuile];
+        res.push(tuileColumn);
       }
     }
     return res;

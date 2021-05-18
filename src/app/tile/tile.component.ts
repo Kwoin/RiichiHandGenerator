@@ -30,7 +30,7 @@ export class TileComponent implements OnInit {
     else if (tile.suite) {
       let tileName: string = tile.suite.substring(0, 1).toLocaleUpperCase();
       tileName += tile.suite.substring(1);
-      if (tile.tuileCode / 10 < 3) tileName += tile.tuileCode % 10;
+      tileName += tile.tuileCode / 10 < 3 ? tile.tuileCode % 10 : tile.tuileCode;
       if (tile.aka) tileName += "-Dora";
       tileName += ".svg";
       this.tileName = tileName;

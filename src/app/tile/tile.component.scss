@@ -13,12 +13,12 @@
   align-items: center;
 }
 
-.left {
+.right {
   transform: rotate(90deg) translate(-133%, 0%);
   transform-origin: bottom left;
 }
 
-.right {
+.left {
   transform: rotate(-90deg) translate(133%, 25%);
   transform-origin: bottom right;
 }

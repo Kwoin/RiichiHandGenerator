@@ -7,6 +7,7 @@ import { TileColumnComponent } from './tile-column/tile-column.component';
 import { TileGroupComponent } from './tile-group/tile-group.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([], { enableTracing: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
