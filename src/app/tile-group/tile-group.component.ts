@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Tuile } from "@kwoin/riichi-utils";
+import { Tuile } from "riichi-utils";
 
 @Component({
   selector: 'bmj-tile-group',
@@ -9,7 +9,7 @@ import { Tuile } from "@kwoin/riichi-utils";
 })
 export class TileGroupComponent implements OnInit {
 
-  @Input() tileColumns: (Tuile & { suite: string})[][] = [];
+  @Input() tileColumns: Tuile[][] = [];
   @Input() tileSize = 75;
 
   constructor() { }

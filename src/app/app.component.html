@@ -5,6 +5,6 @@
 </form>
 <div class="content">
   <div class="groups">
-    <bmj-tile-group @droppingGroup *ngFor="let group of groups" [tileColumns]="group"></bmj-tile-group>
+    <bmj-tile-group @droppingGroup *ngFor="let group of groups; trackBy:trackGroup" [tileColumns]="group"></bmj-tile-group>
   </div>
 </div>

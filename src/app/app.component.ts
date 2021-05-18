@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { Tuile } from "@kwoin/riichi-utils";
+import { kwoinParser, MainBrute, Parser, ParserError, Tuile } from "riichi-utils";
 import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
@@ -19,45 +19,69 @@ export class AppComponent implements OnInit {
 
   riichiForm!: FormGroup;
   errorMessage = "";
-  groups: (Tuile & { suite: string })[][][] = [];
+  groups: Tuile[][][] = [];
+  parser!: Parser;
+  trackGroup = (index: number, obj: object): string => {
+    return index.toString();
+  };
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.parser = kwoinParser;
     this.riichiForm = this.fb.group(
       {
         "hand": null
       }
     )
     this.riichiForm.valueChanges.subscribe(value => {
-      if (value.hand) {
-        this.groups = [
-          [
-            [{tuileCode: 1, suite: "man"}],
-            [{tuileCode: 2, suite: "man"}],
-            [{tuileCode: 3, suite: "man"}],
-            [{tuileCode: 3, suite: "man"}],
-            [{tuileCode: 4, suite: "man"}],
-            [{tuileCode: 5, suite: "man"}],
-            [{tuileCode: 11, suite: "pin"}],
-          ],
-          [
-            [{tuileCode: 25, suite: "sou", tilted: true, tiltRotation: 90, aka: true}, {
-              tuileCode   : 25,
-              suite       : "sou",
-              tilted      : true,
-              tiltRotation: 90,
-              stacked     : true
-            }],
-            [{tuileCode: 25, suite: "sou"}],
-            [{tuileCode: 25, suite: "sou"}],
-          ]
-        ]
-      } else {
+      try {
+        const mainBrute = this.parser(value.hand)[0];
+        this.groups = this.mainBruteToGroups(mainBrute);
+        console.log("groups", this.groups);
+      } catch (e) {
         this.groups = [];
+        this.errorMessage = e.message;
+        console.error(this.errorMessage);
       }
     })
+  }
+
+  mainBruteToGroups(mainBrute: MainBrute): Tuile[][][] {
+    const res: Tuile[][][] = [];
+    if (!mainBrute) return res;
+    const groupeTuileCachees = this.tuilesToGroupe(mainBrute.tuilesCachees);
+    const kansCaches = mainBrute.kansCaches.map(groupe => this.tuilesToGroupe(groupe));
+    const groupesOuvert = mainBrute.groupesOuverts.map(groupe => this.tuilesOuvertesToGroupe(groupe));
+    res.push(groupeTuileCachees, ...kansCaches, ...groupesOuvert);
+    return res;
+  }
+
+  tuilesToGroupe(tuiles: Tuile[]): Tuile[][] {
+    if (!tuiles) return [];
+    return tuiles.map(tuile => [tuile]);
+  }
+
+  tuilesOuvertesToGroupe(tuiles: Tuile[]): Tuile[][] {
+    if (!tuiles) return [];
+    const res = [];
+    const tuilesCopy = tuiles.slice();
+    let tuile;
+    let tuileColumn;
+    while (tuile = tuilesCopy.pop()) {
+      tuileColumn = [tuile];
+      res.unshift(tuileColumn);
+      if (tuile.stacked) {
+        const subTile = tuilesCopy.pop();
+         console.log("subTile", subTile);
+        if (!subTile) continue;
+        tuile.tilted = subTile.tilted;
+        tuile.tiltRotation = subTile.tiltRotation;
+        tuileColumn.unshift(subTile);
+      }
+    }
+    return res;
   }
 
 }

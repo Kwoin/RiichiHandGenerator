@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Tuile, TuileCode } from "@kwoin/riichi-utils";
+import { Tuile, TuileCode } from "riichi-utils";
 
 @Component({
   selector: 'bmj-tile',
@@ -19,7 +19,7 @@ export class TileComponent implements OnInit {
   _width = 0;
   _height = 0;
 
-  @Input() set tile(tile: Tuile & { suite: string }) {
+  @Input() set tile(tile: Tuile) {
     this.back = false;
     this.blank = false;
     this.tileName = "";
