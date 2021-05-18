@@ -19,6 +19,7 @@
   }
   #hand {
     width: 25vw;
+    min-width: 200px;
     padding: 12px 12px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -40,6 +41,12 @@
     > *:not(:first-child) {
       margin-left: 32px;
     }
+  }
+
+  .yakus {
+    padding: 0 40px;
+    color: #DDD;
+    font-size: 32px;
   }
 }
 

@@ -8,6 +8,7 @@ import { TileGroupComponent } from './tile-group/tile-group.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
+import { Location, LocationStrategy, PathLocationStrategy } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -20,9 +21,12 @@ import { RouterModule } from "@angular/router";
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([], { enableTracing: true })
+    RouterModule.forRoot([], { enableTracing: false })
   ],
-  providers: [],
+  providers: [
+    Location,
+    {provide: LocationStrategy, useClass: PathLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

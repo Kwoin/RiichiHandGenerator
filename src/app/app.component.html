@@ -7,4 +7,22 @@
   <div class="groups">
     <bmj-tile-group @droppingGroup *ngFor="let group of groups; trackBy:trackGroup" [tileColumns]="group"></bmj-tile-group>
   </div>
+  <div class="yakus" *ngIf="main">
+    <div *ngFor="let yakuResult of main.yakus" class="score">
+      {{ yakuResult.yaku.name }} : {{ yakuResult.han }} han
+    </div>
+    <div *ngIf="main.dora" class="score">
+      Dora : {{ main.dora }} han
+    </div>
+    <div *ngIf="main.uraDora" class="score">
+      Ura Dora : {{ main.uraDora }} han
+    </div>
+    <div *ngIf="main.akaDora" class="score">
+      Aka Dora : {{ main.akaDora }} han
+    </div>
+    <hr/>
+    <div class="score">
+      Total : {{ main.totalHan }} han
+    </div>
+  </div>
 </div>

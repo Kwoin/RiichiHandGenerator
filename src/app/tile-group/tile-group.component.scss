@@ -1,4 +1,6 @@
 .tile-row {
   display: flex;
   align-items: flex-end;
+  overflow-x: auto;
+  width: 100vw;
 }
