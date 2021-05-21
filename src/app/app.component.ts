@@ -36,10 +36,24 @@ export class AppComponent implements OnInit {
   main: EvaluatedMain | undefined;
   parser!: Parser;
   rule!: Rule;
+  headExpanded = false;
+  content = "";
+
+  get tiles(): Tuile[] {
+    return this.groups
+      .reduce((agg, arr) => agg.concat(arr), [])
+      .reduce((agg, arr) => agg.concat(arr), []);
+  }
 
   trackGroup = (index: number, obj: object): string => {
     return index.toString();
   };
+
+
+  toggleHead(toggleContent: string) {
+    this.headExpanded = !this.headExpanded;
+    this.content = this.headExpanded ? toggleContent : "";
+  }
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -52,10 +66,13 @@ export class AppComponent implements OnInit {
     this.rule = EmaRuleSet;
     this.riichiForm = this.fb.group(
       {
-        "hand": null
+        "hand": null,
+        "tableWind": null,
+        "seatWind": null,
+        "winningTile": null,
       }
     )
-    this.riichiForm.valueChanges.subscribe( ({ hand }) => {
+    this.riichiForm.get("hand")?.valueChanges.subscribe( hand => {
       this.errorMessage = "";
       this.groups = [];
       this.main = undefined;

@@ -1,11 +1,24 @@
-<form [formGroup]="riichiForm">
-  <div class="head">
-    <label for="hand">Main</label><input id="hand" formControlName="hand" />
+<form [formGroup]="riichiForm" class="hand-form">
+  <div class="head" [class.expanded]="headExpanded">
+    <div class="hand"><label for="hand">Main</label><input id="hand" formControlName="hand"/></div>
+    <div class="content">
+      <div *ngIf="content === 'details'" class="details">
+        <bmj-wind-field [parentGroup]="riichiForm"></bmj-wind-field>
+        <bmj-winning-tile-field formControlName="winningTile" [tiles]="tiles"></bmj-winning-tile-field>
+      </div>
+    </div>
+
+  </div>
+  <div class="languettes">
+    <bmj-languette icon="expand_more" (click)="toggleHead('details')" [flipOnActivate]="true"></bmj-languette>
+    <bmj-languette icon="help_outline" (click)="toggleHead('help')"></bmj-languette>
   </div>
 </form>
 <div class="content">
-  <div class="groups">
-    <bmj-tile-group @droppingGroup *ngFor="let group of groups; trackBy:trackGroup" [tileColumns]="group"></bmj-tile-group>
+  <div>
+    <div class="groups">
+      <bmj-tile-group @droppingGroup *ngFor="let group of groups; trackBy:trackGroup" [tileColumns]="group"></bmj-tile-group>
+    </div>
   </div>
   <div class="yakus" *ngIf="main">
     <div *ngFor="let yakuResult of main.yakus" class="score">

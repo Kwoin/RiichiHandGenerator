@@ -1,0 +1,6 @@
+<div class="winning-tile-field">
+  <div class="winning-tile" *ngFor="let tile of _tiles" (click)="winningTile(tile)">
+    <bmj-tile [width]="35" [tile]="tile"></bmj-tile>
+    <div class="winning-tile-label" [@winningTile]="tile.win ? 'win' : 'nowin'" *ngIf="tile.win">{{ tile.win }}</div>
+  </div>
+</div>

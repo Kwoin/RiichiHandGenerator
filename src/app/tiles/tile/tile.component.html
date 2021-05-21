@@ -1,11 +1,11 @@
 <div [style.width]="(tiltLeft || tiltRight ? height : width) + 'px'" [style.height]="(tiltLeft || tiltRight ? width : height) + 'px'">
   <div class="tile-container" [style.width]="width + 'px'" [style.height]="height + 'px'" [class.left]="tiltLeft" [class.right]="tiltRight">
-    <img src="assets/tiles/Back.png" *ngIf="back; else tileTemplate" class="tile" [width]="width" [height]="height"/>
+    <img src="../../../assets/tiles/Back.png" *ngIf="back; else tileTemplate" class="tile" [width]="width" [height]="height"/>
     <ng-template #tileTemplate>
-      <img src="assets/tiles/Front.png" class="tile" [width]="width" [height]="height"/>
+      <img src="../../../assets/tiles/Front.png" class="tile" [width]="width" [height]="height"/>
       <div class="tile-image" [style.width]="width + 'px'" [style.height]="height + 'px'">
         <img *ngIf="tileName" [src]="'assets/tiles/' + tileName" [width]="width * 0.75" [height]="height * 0.75"/>
-        <img *ngIf="blank" src="assets/tiles/Blank.svg" [width]="width * 0.75" [height]="height * 0.75"/>
+        <img *ngIf="blank" src="../../../assets/tiles/Blank.svg" [width]="width * 0.75" [height]="height * 0.75"/>
       </div>
     </ng-template>
   </div>

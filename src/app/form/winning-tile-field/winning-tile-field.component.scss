@@ -1,0 +1,15 @@
+.winning-tile-field {
+  display: flex;
+  column-gap: 8px;
+  align-items: end;
+
+  .winning-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .winning-tile-label {
+    font-size: 10px;
+  }
+
+}

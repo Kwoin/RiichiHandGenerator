@@ -1,42 +1,76 @@
-.head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #FAFAFA;
-  padding: 32px 0;
-  box-shadow: 0px 3px 5px 0px #CECECE;
+.hand-form {
+  .head {
+    background: #FAFAFA;
+    padding: 32px 0 0 0;
+    box-shadow: 0px 3px 5px 0px #CECECE;
+    height: 118px;
+    overflow: hidden;
+    transition: height ease-in 300ms;
 
-  #hand, label[for=hand] {
-    box-shadow: 3px 3px 5px 0px #CECECE;
-    border: 2px solid #CCC;
-    font-size: 20px;
-  }
-  label[for="hand"] {
-    background: #EEE;
-    padding: 12px 12px;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
-  #hand {
-    width: 25vw;
-    min-width: 200px;
-    padding: 12px 12px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-left: none;
-    &:focus,&:focus-visible {
-      outline: none;
-      box-shadow: 0px 0px 3px 2px #7CD1FF;
+    &.expanded {
+      height: 75vh;
     }
+
+    .hand {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      #hand, label[for=hand] {
+        box-shadow: 3px 3px 5px 0px #CECECE;
+        border: 2px solid #CCC;
+        font-size: 20px;
+      }
+
+      label[for="hand"] {
+        background: #EEE;
+        padding: 12px 12px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+
+      #hand {
+        width: 25vw;
+        min-width: 200px;
+        padding: 12px 12px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-left: none;
+
+        &:focus, &:focus-visible {
+          outline: none;
+          box-shadow: 0px 0px 3px 2px #7CD1FF;
+        }
+      }
+
+    }
+
+    .details {
+      width: 100vw;
+    }
+
   }
+
+  .languettes {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-right: 32px;
+    column-gap: 12px;
+  }
+
 }
 
 .content {
   .groups {
     display: flex;
-    justify-content: center;
+    justify-content: safe center;
     padding: 32px 0;
     align-items: flex-end;
+    overflow-x: auto;
 
     > *:not(:first-child) {
       margin-left: 32px;

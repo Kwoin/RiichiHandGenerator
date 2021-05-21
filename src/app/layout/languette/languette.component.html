@@ -1,0 +1,3 @@
+<div *ngIf="icon" class="languette" (mouseover)="setOver(true)" (mouseout)="setOver(false)" (click)="toggleActivated()">
+  <span class="material-icons" [@pull]="over" [@flip]="activated && flipOnActivate">{{ icon }}</span>
+</div>
