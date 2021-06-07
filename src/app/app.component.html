@@ -31,8 +31,11 @@
           <li>Le premier groupe ne sera jamais considéré comme un kan caché</li>
         </ul>
         <p>Exemples</p>
-        <a href="/?hand=%2222s333m456p444s%205v555vs%22">2222s333m456p444s 5v555vs</a> , <a href="/?hand=%22223344m456p78999s%22">223344m456p78999s</a> , <a href="/?hand=%22666s55z 4>44z 666>z 88>8p%22">666s55z 4>44z 666>z 88>8p</a>
-      </div>
+        <ng-container *ngFor="let example of examples; let last = last">
+          <a [routerLink]="['/']" [queryParams]="{hand: example}">{{example}}</a><ng-container *ngIf="!last"> , </ng-container>
+        </ng-container>
+        <p>Auteur <a href="https://github.com/Kwoin">@Pierric Willemet</a> - Tuiles par <a href="https://github.com/FluffyStuff/riichi-mahjong-tiles">@FluffyStuff</a></p>
+     </div>
     </div>
 
   </div>
@@ -62,7 +65,9 @@
     </div>
     <hr/>
     <div class="score total">
-      <div>Total : {{ main.totalHan }} han {{ main.fu }} fu</div><div>{{score | number:'1.0-0':'fr-FR'}} points</div>
+      <div>Total : {{ main.totalHan }} han {{ main.fu }} fu</div><div>{{score | number:'1.0-0':'fr-FR'}} points
+      <ng-container *ngIf="paymentDetails as paymentDetail"> {{paymentDetail}}</ng-container>
+      <ng-container *ngIf="handName as name"> - {{name}}</ng-container></div>
     </div>
   </div>
 </div>

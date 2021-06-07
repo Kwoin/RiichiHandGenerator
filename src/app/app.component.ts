@@ -17,6 +17,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { WinningTile } from "./form/winning-tile-field/winning-tile-field.component";
 import { map } from 'rxjs/operators';
+import { Payment } from "riichi-utils/model/rule/payment";
 
 @Component({
   selector   : 'app-root',
@@ -41,7 +42,12 @@ export class AppComponent implements OnInit {
   headExpanded = false;
   content = "";
   mainBrute: RawHand | undefined;
-  score: number | undefined;
+  payment: Payment | undefined;
+  examples = [
+    '"22s333m456p444s 5v555vs"',
+    '"223344m456p78999s"',
+    '"666s55z 4>44z 666>z 88>8p"'
+  ]
 
   get tiles(): Tile[] {
     return this.groups
@@ -51,6 +57,32 @@ export class AppComponent implements OnInit {
 
   get detailsForm(): FormGroup {
     return this.riichiForm.get("details") as FormGroup;
+  }
+
+  get score(): string {
+    if (!this.payment) return "";
+    return Object.values(this.payment).reduce((a, b) => a + b, 0).toString();
+  }
+
+  get handName(): string {
+    if (!this.main) return "";
+    if (this.main.yakus.some(yaku => yaku.yaku.yakuman > 0)) return "Yakuman";
+    if (this.main.totalHan > 10) return "Sanbaiman";
+    if (this.main.totalHan > 7) return "Baiman";
+    if (this.main.totalHan > 5) return "Haneman";
+    if (this.main.totalHan > 4 || this.main.totalHan === 4 && this.main.fu >= 40) return "Mangan";
+    return "";
+  }
+
+  get paymentDetails(): string {
+    if (!this.payment) return "";
+    const gameContext = this.computeGameContext();
+    if (!gameContext.tsumoTile) return "";
+    const values = new Set<number>();
+    Object.values(this.payment)
+      .filter(n => n)
+      .forEach(n => values.add(n));
+    return `(${[...values].sort((a,b) => b - a).join(" ")})`;
   }
 
   trackGroup = (index: number, obj: object): string => {
@@ -188,7 +220,7 @@ export class AppComponent implements OnInit {
   }
 
   getDoraTileCode(indicator: TileCode): TileCode | null {
-    if (indicator < 30) return ((indicator + 1) % 10 % 9 + Math.trunc(indicator / 10) * 10) as TileCode;
+    if (indicator < 30) return (indicator % 10 % 9 + 1 + Math.trunc(indicator / 10) * 10) as TileCode;
     if (indicator < 38) return ((indicator + 2) % 10 % 8 + 30) as TileCode;
     if (indicator < 46) return ((indicator + 2) % 10 % 6 + 40) as TileCode;
     return null;
@@ -207,8 +239,7 @@ export class AppComponent implements OnInit {
         const maxHan = Math.max(...mains.map(main => main.totalHan));
         this.main = mains.filter(main => main.totalHan === maxHan)
           .reduce((currentMain, main) => main.fu > currentMain.fu ? main : currentMain, mains[0]);
-        const payment = this.rule.toScoringPoint(this.main, gameContext);
-        this.score = Object.values(payment).reduce((a, b) => a + b, 0);
+        this.payment = this.rule.toScoringPoint(this.main, gameContext);
       }
     }
   }
