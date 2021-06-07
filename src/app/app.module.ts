@@ -8,11 +8,17 @@ import { TileGroupComponent } from './tiles/tile-group/tile-group.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
-import { Location, LocationStrategy, PathLocationStrategy } from "@angular/common";
+import { Location, LocationStrategy, PathLocationStrategy, registerLocaleData } from "@angular/common";
 import { LanguetteComponent } from './layout/languette/languette.component';
 import { SwitchButtonComponent } from './layout/switch-button/switch-button.component';
 import { WindFieldComponent } from './form/wind-field/wind-field.component';
 import { WinningTileFieldComponent } from './form/winning-tile-field/winning-tile-field.component';
+import { DoraFieldComponent } from './form/dora-field/dora-field.component';
+import { TileSelectComponent } from './layout/tile-select/tile-select.component';
+import { SwitchesComponent } from './form/switches/switches.component';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -23,7 +29,10 @@ import { WinningTileFieldComponent } from './form/winning-tile-field/winning-til
     LanguetteComponent,
     SwitchButtonComponent,
     WindFieldComponent,
-    WinningTileFieldComponent
+    WinningTileFieldComponent,
+    DoraFieldComponent,
+    TileSelectComponent,
+    SwitchesComponent
   ],
   imports: [
     BrowserModule,

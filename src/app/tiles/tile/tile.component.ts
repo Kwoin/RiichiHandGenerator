@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Tuile, TuileCode } from "riichi-utils";
+import { Tile, TileCode } from "riichi-utils";
 
 @Component({
   selector: 'bmj-tile',
@@ -19,18 +19,18 @@ export class TileComponent implements OnInit {
   _width = 0;
   _height = 0;
 
-  @Input() set tile(tile: Tuile) {
+  @Input() set tile(tile: Tile) {
     this.back = false;
     this.blank = false;
     this.tileName = "";
     this.tiltLeft = !!tile.tiltRotation && tile.tiltRotation > 0;
     this.tiltRight = !!tile.tiltRotation && tile.tiltRotation < 0;
-    if (tile.tuileCode === TuileCode.unknown) this.blank = true;
+    if (tile.tileCode === TileCode.unknown) this.blank = true;
     else if (tile.reverted) this.back = true;
     else if (tile.suite) {
       let tileName: string = tile.suite.substring(0, 1).toLocaleUpperCase();
       tileName += tile.suite.substring(1);
-      tileName += tile.tuileCode / 10 < 3 ? tile.tuileCode % 10 : tile.tuileCode;
+      tileName += tile.tileCode / 10 < 3 ? tile.tileCode % 10 : tile.tileCode;
       if (tile.aka) tileName += "-Dora";
       tileName += ".svg";
       this.tileName = tileName;

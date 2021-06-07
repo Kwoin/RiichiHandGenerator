@@ -1,0 +1,14 @@
+.switches {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 16px;
+  row-gap: 8px;
+  width: 372px;
+  height: 100%;
+  .switch-field {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    min-width: 170px;
+  }
+}

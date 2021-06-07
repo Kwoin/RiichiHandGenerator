@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -17,7 +17,7 @@ const CUSTOM_VALUE_ACCESSOR: any = {
   animations: [
     trigger("switch", [
       state("false", style({ paddingLeft: "*", backgroundColor: "*" })),
-      state("true", style({ paddingLeft: "16px", backgroundColor: "#098815" })),
+      state("true", style({ paddingLeft: "16px", backgroundColor: "#00E109" })),
       transition("true <=> false", animate("200ms ease-in"))
     ]),
   ]
@@ -29,7 +29,7 @@ export class SwitchButtonComponent implements ControlValueAccessor  {
   onTouched = () => {};
   disabled = false;
 
-  constructor() { }
+  constructor(private ref: ChangeDetectorRef) { }
 
   toggle() {
     this.activated = !this.activated;
@@ -51,5 +51,6 @@ export class SwitchButtonComponent implements ControlValueAccessor  {
 
   writeValue(obj: any): void {
     this.activated = obj;
+    this.ref.markForCheck();
   }
 }

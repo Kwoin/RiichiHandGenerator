@@ -1,0 +1,30 @@
+<div class="dora-field">
+  <div class="dora-sub-field">
+    <div class="dora-field-label">Dora</div>
+    <ng-container *ngTemplateOutlet="tilesTemplate; context: { $implicit: doraTiles }"></ng-container>
+  </div>
+  <div class="separator"></div>
+  <div class="dora-sub-field">
+    <div class="dora-field-label">Ura dora</div>
+    <ng-container *ngTemplateOutlet="tilesTemplate; context: { $implicit: uraDoraTiles }"></ng-container>
+  </div>
+</div>
+
+<ng-template let-tiles #tilesTemplate>
+  <div class="dora-tiles">
+    <div *ngFor="let tile of tiles; let i = index" (mouseover)="flip(tiles, i)" (mouseleave)="unflip()">
+      <div *ngIf="!tile; else tileTemplate" class="add-dora" [class.disabled]="isDisabled(tiles, i)" (click)="setDora(tiles, i)">
+        <span [@flip]="i === getFlipIndex(tiles)" class="material-icons">add_circle</span>
+      </div>
+      <ng-template #tileTemplate>
+        <div class="dora-tile" (mouseenter)="setTileOver(tile)" (mouseleave)="setTileOver()">
+          <bmj-tile [width]="35" [tile]="tile"></bmj-tile>
+          <div [@tileOver] *ngIf="tileOver === tile" class="dora-tile-actions">
+            <span class="material-icons dora-tile-action" (click)="setDora(tiles, i)">create</span>
+            <span class="material-icons dora-tile-action" (click)="deleteDora(tiles, i)">delete</span>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

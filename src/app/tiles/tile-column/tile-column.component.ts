@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Tuile } from "riichi-utils";
+import { Tile } from "riichi-utils";
 import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
@@ -19,7 +19,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
 })
 export class TileColumnComponent implements OnInit {
 
-  @Input() tiles: Tuile[] = [];
+  @Input() tiles: Tile[] = [];
   @Input() tileSize: number = 75;
 
   constructor() { }

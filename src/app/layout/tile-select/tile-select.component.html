@@ -1,0 +1,14 @@
+<ng-container *ngIf="visible">
+  <div class="overlay" (click)="hide()">
+  </div>
+  <div class="wrapper" [@show]>
+    <div class="popup">
+      <div class="tile" *ngFor="let tuile of tuiles">
+        <bmj-tile [width]="30" [tile]="tuile"
+                  (click)="handleClick(tuile, $event)"
+                  (mouseenter)="setOverTuiles(tuile)"
+                  (mouseleave)="setOverTuiles()"></bmj-tile>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,68 @@
+.dora-field {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  column-gap: 16px;
+
+  .dora-sub-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .dora-tiles {
+      display: flex;
+      column-gap: 8px;
+      flex-grow: 2;
+      align-items: center;
+
+      .dora-tile {
+        display: flex;
+        flex-direction: column;
+
+        .dora-tile-actions {
+          display: flex;
+          justify-content: space-around;
+          padding: 0 0 8px 0;
+          .dora-tile-action {
+            font-size: 12px;
+            cursor: pointer;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      .add-dora {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed #00E109;
+        color: #00E109;
+        cursor: pointer;
+        border-radius: 2px;
+        width: 35px;
+        height: 46px;
+        transition: border-color 200ms ease-in, color 200ms ease-in;
+
+        &.disabled {
+          cursor: unset;
+          border-color: #CCC;
+          color: #CCC;
+          .material-icons {
+            transform: rotate(45deg);
+          }
+        }
+
+        &:not(.disabled):hover {
+          border-color: yellow;
+          color: yellow;
+        }
+      }
+    }
+  }
+
+  .separator {
+    border-left: 1px solid #CCC;
+  }
+}

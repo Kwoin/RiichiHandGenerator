@@ -2,15 +2,42 @@
   <div class="head" [class.expanded]="headExpanded">
     <div class="hand"><label for="hand">Main</label><input id="hand" formControlName="hand"/></div>
     <div class="content">
-      <div *ngIf="content === 'details'" class="details">
-        <bmj-wind-field [parentGroup]="riichiForm"></bmj-wind-field>
-        <bmj-winning-tile-field formControlName="winningTile" [tiles]="tiles"></bmj-winning-tile-field>
+      <div *ngIf="content === 'details'" class="details" formGroupName="details">
+        <div class="detail-module"><bmj-wind-field [parentGroup]="detailsForm"></bmj-wind-field></div>
+        <div class="detail-module" *ngIf="tiles.length"><bmj-winning-tile-field formControlName="winningTile" [tiles]="tiles"></bmj-winning-tile-field></div>
+        <div class="detail-module"><bmj-dora-field [parentGroup]="detailsForm"></bmj-dora-field></div>
+        <div class="detail-module"><bmj-switches [parentGroup]="detailsForm"></bmj-switches></div>
+      </div>
+      <div *ngIf="content === 'help'" class="help">
+        <div><a target="_blank" href="https://web.ffmahjong.fr/galerie">Règle RCR EMA</a></div>
+        <p>Syntaxe PMSZ</p>
+        <ul>
+          <li>123p pour 1,2,3 de cercle; 44456m pour 4,4,4,5,6 de caractères, 88s pour 8,8 de bambou</li>
+          <li>1z : East, 2z: Sud, 3z: Ouest, 4z: Nord, 5z: Rouge, 6z: Vert, 7z: Blanc</li>
+          <li>44455z: Nord,Nord,Nord,Blanc,Blanc</li>
+        </ul>
+        <p>Modificateur de tuile, à ajouter à la suite de la tuile concernée</p>
+        <ul>
+          <li>'<' ou '>' : Incliner la tuile</li>
+          <li>'^' : Empiler la tuile sur la tuile précédente</li>
+          <li>'v' : Retourner la tuile</li>
+        </ul>
+        <p>Compléments</p>
+        <ul>
+          <li>Plusieurs groupes de tuiles peuvent être formé en séparant des syntaxes pmsz avec un espace</li>
+          <li>Le premier groupe est toujours considéré comme fermé, il représente les tuiles cachées dans la main du joueur au moment de la victoire + la tuile victorieuse.</li>
+          <li>Les groupes qui suivent sont considérés comme ouverts si ils possèdent une tuile inclinée</li>
+          <li>Un groupe est considéré comme un kan caché s'il est composé des 4 tuiles identiques dont deux sont retournées</li>
+          <li>Le premier groupe ne sera jamais considéré comme un kan caché</li>
+        </ul>
+        <p>Exemples</p>
+        <a href="http://localhost:4200/?hand=%2222s333m456p444s%205v555vs%22">2222s333m456p444s 5v555vs</a> , <a href="http://localhost:4200/?hand=%22223344m456p78999s%22">223344m456p78999s</a> , <a href="http://localhost:4200/?hand=%22666s55z 4>44z 666>z 88>8p%22">666s55z 4>44z 666>z 88>8p</a>
       </div>
     </div>
 
   </div>
   <div class="languettes">
-    <bmj-languette icon="expand_more" (click)="toggleHead('details')" [flipOnActivate]="true"></bmj-languette>
+    <bmj-languette icon="settings" (click)="toggleHead('details')" [flipOnActivate]="true"></bmj-languette>
     <bmj-languette icon="help_outline" (click)="toggleHead('help')"></bmj-languette>
   </div>
 </form>
@@ -20,7 +47,7 @@
       <bmj-tile-group @droppingGroup *ngFor="let group of groups; trackBy:trackGroup" [tileColumns]="group"></bmj-tile-group>
     </div>
   </div>
-  <div class="yakus" *ngIf="main">
+  <div class="yakus" *ngIf="main && main.yakus.length > 0">
     <div *ngFor="let yakuResult of main.yakus" class="score">
       {{ yakuResult.yaku.name }} : {{ yakuResult.han }} han
     </div>
@@ -34,8 +61,9 @@
       Aka Dora : {{ main.akaDora }} han
     </div>
     <hr/>
-    <div class="score">
-      Total : {{ main.totalHan }} han
+    <div class="score total">
+      <div>Total : {{ main.totalHan }} han {{ main.fu }} fu</div><div>{{score | number:'1.0-0':'fr-FR'}} points</div>
     </div>
   </div>
 </div>
+<bmj-tile-select></bmj-tile-select>

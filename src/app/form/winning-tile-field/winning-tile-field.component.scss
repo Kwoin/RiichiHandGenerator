@@ -1,15 +1,27 @@
 .winning-tile-field {
   display: flex;
+  flex-direction: column;
   column-gap: 8px;
-  align-items: end;
+  align-items: center;
+  font-size: 10px;
+  height: 100%;
 
-  .winning-tile {
+  .winning-tiles {
     display: flex;
-    flex-direction: column;
+    column-gap: 8px;
     align-items: center;
-  }
-  .winning-tile-label {
-    font-size: 10px;
+    height: 70px;
+    flex-grow: 2;
+
+    .winning-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+    .winning-tile-label {
+      font-size: 8px;
+    }
   }
 
 }

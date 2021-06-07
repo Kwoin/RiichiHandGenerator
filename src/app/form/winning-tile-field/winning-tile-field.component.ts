@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input } from '@angular/core';
-import { Tuile, TuileCode } from "riichi-utils";
+import { Tile, TileCode } from "riichi-utils";
 import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 const CUSTOM_VALUE_ACCESSOR: any = {
   provide : NG_VALUE_ACCESSOR,
@@ -9,7 +9,7 @@ const CUSTOM_VALUE_ACCESSOR: any = {
   multi : true,
 };
 
-export type WinningTile = Tuile & { win?: string };
+export type WinningTile = Tile & { win?: string };
 
 @Component({
   selector       : 'bmj-winning-tile-field',
@@ -32,20 +32,27 @@ export type WinningTile = Tuile & { win?: string };
 })
 export class WinningTileFieldComponent implements ControlValueAccessor {
 
+  kanPresent = false;
   _tiles: WinningTile[] = [];
   onChange = (tile: WinningTile | null) => {};
   onTouched = () => {};
 
   @Input() parentGroup!: FormGroup;
-  @Input() set tiles(tiles: Tuile[]) {
+  @Input() set tiles(tiles: Tile[]) {
+    let count = 1;
+    const sortedTiles = tiles.slice().sort((a, b) => a.tileCode - b.tileCode);
+    for (let i = 1; i < sortedTiles.length && count < 4; i++) {
+      if (sortedTiles[i].tileCode === sortedTiles[i - 1].tileCode) count++;
+      else count = 1;
+    }
+    this.kanPresent = count === 4;
     this._tiles = [];
-    const tileCodes: TuileCode[] = [];
-    tiles.filter(tile => !tile.tilted && !tile.stacked && !tile.reverted && tile.tuileCode !== TuileCode.unknown)
-      .sort((a, b) => a.tuileCode - b.tuileCode)
+    const tileCodes: TileCode[] = [];
+    sortedTiles.filter(tile => !tile.tilted && !tile.stacked && !tile.reverted && tile.tileCode !== TileCode.unknown)
       .forEach(tile => {
-        if (!tileCodes.includes(tile.tuileCode)) {
+        if (!tileCodes.includes(tile.tileCode)) {
           this._tiles.push(tile);
-          tileCodes.push(tile.tuileCode);
+          tileCodes.push(tile.tileCode);
         }
       })
   }
@@ -56,11 +63,14 @@ export class WinningTileFieldComponent implements ControlValueAccessor {
   ngOnInit(): void {
   }
 
-  winningTile(tile: WinningTile) {
-    if (!tile.win) tile.win = "Ron";
-    else if (tile.win === "Ron") tile.win = "Tsumo";
-    else if (tile.win === "Tsumo") tile.win = undefined;
-    this.onChange(tile.win ? tile : null);
+  winningTile(winningTile: WinningTile) {
+    this._tiles.filter(tile => tile !== winningTile).forEach(tile => tile.win = undefined);
+    if (!winningTile.win) winningTile.win = "Ron";
+    else if (winningTile.win === "Ron") winningTile.win = "Tsumo";
+    else if (winningTile.win === "Tsumo") winningTile.win = "Chankan";
+    else if (winningTile.win === "Chankan") winningTile.win = this.kanPresent ? "Rinshan" : undefined;
+    else if (winningTile.win === "Rinshan") winningTile.win = undefined;
+    this.onChange(winningTile.win ? winningTile : null);
     this.onTouched();
   }
 
@@ -76,7 +86,7 @@ export class WinningTileFieldComponent implements ControlValueAccessor {
     if (!winningTile) {
       this._tiles.forEach(tile => tile.win = undefined);
     } else {
-      const tile = this._tiles.find(tile => tile.tuileCode === winningTile.tuileCode);
+      const tile = this._tiles.find(tile => tile.tileCode === winningTile.tileCode);
       if (tile) tile.win = winningTile.win;
     }
   }

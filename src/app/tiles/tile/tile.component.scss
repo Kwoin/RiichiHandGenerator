@@ -22,3 +22,7 @@
   transform: rotate(-90deg) translate(133%, 25%);
   transform-origin: bottom right;
 }
+
+img {
+  user-select: none;
+}

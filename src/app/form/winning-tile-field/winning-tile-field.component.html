@@ -1,6 +1,12 @@
 <div class="winning-tile-field">
-  <div class="winning-tile" *ngFor="let tile of _tiles" (click)="winningTile(tile)">
-    <bmj-tile [width]="35" [tile]="tile"></bmj-tile>
-    <div class="winning-tile-label" [@winningTile]="tile.win ? 'win' : 'nowin'" *ngIf="tile.win">{{ tile.win }}</div>
+  <div>Tuile gagnante</div>
+  <div class="winning-tiles">
+    <div class="winning-tile" *ngFor="let tile of _tiles" (click)="winningTile(tile)">
+      <div class="winning-tile-label" [@winningTile]="tile.win ? 'win' : 'nowin'"
+           *ngIf="tile.win === 'Tsumo' || tile.win === 'Rinshan'">{{ tile.win }}</div>
+      <bmj-tile [width]="35" [tile]="tile"></bmj-tile>
+      <div class="winning-tile-label" [@winningTile]="tile.win ? 'win' : 'nowin'"
+           *ngIf="tile.win === 'Ron' || tile.win === 'Chankan'">{{ tile.win }}</div>
+    </div>
   </div>
 </div>

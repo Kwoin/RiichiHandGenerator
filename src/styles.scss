@@ -12,5 +12,10 @@ body {
 
   input {
     font-family: inherit;
+    margin: 0;
+  }
+
+  .material-icons {
+    user-select: none;
   }
 }

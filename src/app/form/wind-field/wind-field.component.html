@@ -1,17 +1,18 @@
 <div class="wind-field" [formGroup]="parentGroup">
   <div class="label">Vent de la table</div>
-  <div class="radio"><input type="radio" [value]="east" formControlName="tableWind"/></div>
-  <div class="radio"><input type="radio" [value]="south" formControlName="tableWind"/></div>
-  <div class="radio"><input type="radio" [value]="west" formControlName="tableWind"/></div>
-  <div class="radio"><input type="radio" [value]="north" formControlName="tableWind"/></div>
-  <div class="label"></div>
-  <bmj-tile [width]="35" [tile]="east"></bmj-tile>
-  <bmj-tile [width]="35" [tile]="south"></bmj-tile>
-  <bmj-tile [width]="35" [tile]="west"></bmj-tile>
-  <bmj-tile [width]="35" [tile]="north"></bmj-tile>
+  <div class="winds">
+    <div class="radio"><input type="radio" [value]="east.tileCode" formControlName="tableWind"/></div>
+    <div class="radio"><input type="radio" [value]="south.tileCode" formControlName="tableWind"/></div>
+    <div class="radio"><input type="radio" [value]="west.tileCode" formControlName="tableWind"/></div>
+    <div class="radio"><input type="radio" [value]="north.tileCode" formControlName="tableWind"/></div>
+    <bmj-tile [width]="35" [tile]="east"></bmj-tile>
+    <bmj-tile [width]="35" [tile]="south"></bmj-tile>
+    <bmj-tile [width]="35" [tile]="west"></bmj-tile>
+    <bmj-tile [width]="35" [tile]="north"></bmj-tile>
+    <div class="radio"><input type="radio" [value]="east.tileCode" formControlName="seatWind"/></div>
+    <div class="radio"><input type="radio" [value]="south.tileCode" formControlName="seatWind"/></div>
+    <div class="radio"><input type="radio" [value]="west.tileCode" formControlName="seatWind"/></div>
+    <div class="radio"><input type="radio" [value]="north.tileCode" formControlName="seatWind"/></div>
+  </div>
   <div class="label">Vent du joueur</div>
-  <div class="radio"><input type="radio" [value]="east" formControlName="seatWind"/></div>
-  <div class="radio"><input type="radio" [value]="south" formControlName="seatWind"/></div>
-  <div class="radio"><input type="radio" [value]="west" formControlName="seatWind"/></div>
-  <div class="radio"><input type="radio" [value]="north" formControlName="seatWind"/></div>
 </div>
